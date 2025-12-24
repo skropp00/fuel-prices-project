@@ -16,7 +16,8 @@ RIGHT JOIN [usa-gasoline-spot] gs
 RIGHT JOIN [usa-diesel-spot] ds
 	ON co.Date = ds.Date
 
--- Retail Margin
+-- Downstream Margin
+-- This calculates all the costs from refinery output to the pump, but not the actual site margin which would include transport and tax costs
 -- We have a data issue here. The crude spots (end of week) and the retail prices (beginning of week) are misaligned on date patterns. 
 -- Solving this issue with cross apply function to pull one date out of the week
 SELECT 
@@ -26,7 +27,7 @@ SELECT
 	-- Crude barrel converted to gallons, plus the crack spread gallon cost estimate equals gallon price for the wholesaler
 	(c.[Weekly Cushing, OK WTI Spot Price ]/42 + crack.crack_321_gallon) AS wholesaler_gallon_cost,
 	-- Takes the historic retail price that the retailer charged and subtracts the wholesale gallon cost
-	gr.[Weekly U#S# Regular Conventional Retail Gasoline Prices  (Dollar] - (c.[Weekly Cushing, OK WTI Spot Price ]/42 + crack.crack_321_gallon) AS retailer_margin
+	gr.[Weekly U#S# Regular Conventional Retail Gasoline Prices  (Dollar] - (c.[Weekly Cushing, OK WTI Spot Price ]/42 + crack.crack_321_gallon) AS downstream_margin
 FROM [usa-gasoline-retail] gr
 JOIN [usa-diesel-retail] dr
 	ON gr.Date = dr.Date
