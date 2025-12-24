@@ -1,6 +1,7 @@
 # fuel-prices-project
 
 A portfolio project exploring U.S. fuel pricing dynamics using historical EIA data.
+[Tableau Dashboard Link](https://public.tableau.com/app/profile/samuel.kropp/viz/Fuel-Pricing-Dashboard/Fuel-Pricing-Dashboard)
 
 ## What It Does
 - Pulls weekly EIA data for:
